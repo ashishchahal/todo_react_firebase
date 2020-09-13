@@ -22,7 +22,7 @@ function App() {
       });
   }, []);
 
-  console.log("🙅‍♀️", input);
+  //console.log("🙅‍♀️", input);
 
   const addTodo = (e) => {
     // this will fire when button is clicked
@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="app__heading">Hello Peeps 🤼!!</h1>
+      <h1 className="app__heading">TO DO 🎆</h1>
 
       <form>
         <FormControl>
