@@ -16,7 +16,9 @@ function App() {
       .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         //onSnapshot listenes to your db and fires setTodos
-        setTodos(snapshot.docs.map((doc) => doc.data().todo));
+        setTodos(
+          snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo }))
+        );
       });
   }, []);
 
@@ -50,6 +52,7 @@ function App() {
         </FormControl>
         <Button
           disabled={!input}
+          type="submit"
           color="primary"
           onClick={addTodo}
           variant="contained"
@@ -64,7 +67,7 @@ function App() {
 
       <ul className="">
         {todos.map((todo) => (
-          <ToDo text={todo} />
+          <ToDo todo={todo} />
         ))}
       </ul>
     </div>
