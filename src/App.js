@@ -1,31 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, FormControl, InputLabel } from "@material-ui/core";
 import "./App.css";
 import ToDo from "./ToDo";
+import firebase from "firebase";
+import db from "./firebase";
 
 function App() {
-  const [todos, setTodos] = useState([
-    "take the dogs out for a walk",
-    "exercise daily",
-    "meditation",
-  ]);
-
+  const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
+
+  //when the app loads, we need to listen to the database and fetch new todos as they get added/removed
+  useEffect(() => {
+    // this code here... fires when the app.js loads
+    db.collection("todos")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        //onSnapshot listenes to your db and fires setTodos
+        setTodos(snapshot.docs.map((doc) => doc.data().todo));
+      });
+  }, []);
 
   console.log("🙅‍♀️", input);
 
   const addTodo = (e) => {
     // this will fire when button is clicked
-
-    console.log("👽", e);
     e.preventDefault();
-    setTodos([...todos, input]);
+
+    db.collection("todos").add({
+      todo: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
     setInput("");
   };
 
   return (
     <div className="App">
-      <h1 className="">Hello Peeps!!</h1>
+      <h1 className="app__heading">Hello Peeps 🤼!!</h1>
 
       <form>
         <FormControl>
