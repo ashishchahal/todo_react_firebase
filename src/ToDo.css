@@ -1,3 +1,44 @@
 .todo__list {
+  display: flex;
+  object-fit: contain;
+  justify-content: space-between;
   text-align: center;
+  border: 2px solid lightgray;
+  border-radius: 20px;
+  margin: 5px !important;
+  background-color: lightseagreen;
+}
+
+.todo__left {
+  flex: 0.8;
+}
+
+.todo__right {
+  flex: 0.2;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 5px;
+}
+
+.todo__listEdit {
+  height: 50px;
+  flex: 0.4;
+  transition: transform 450ms;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.todo__listEdit:hover {
+  transform: scale(1.09);
+}
+
+.todo__listDelete {
+  flex: 0.6;
+  cursor: pointer;
+  height: 50px !important;
+  transition: transform 450ms;
+}
+
+.todo__listDelete:hover {
+  transform: scale(1.2);
 }

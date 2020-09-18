@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <h1 className="app__heading">TO DO 🎆</h1>
 
       <form>

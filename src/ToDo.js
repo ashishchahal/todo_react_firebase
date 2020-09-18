@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ToDo.css";
 import db from "./firebase";
-import firebase from "firebase";
+//import firebase from "firebase";
 import {
   List,
   ListItem,
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     width: 400,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
+    borderRadius: "2px",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -53,7 +54,7 @@ function ToDo(props) {
           <h1>Update your task!</h1>
           <form>
             <FormControl>
-              <InputLabel>OOps!</InputLabel>
+              <InputLabel>Update here!</InputLabel>
               <Input
                 className=""
                 placeholder={props.todo.todo}
@@ -83,20 +84,28 @@ function ToDo(props) {
         </div>
       </Modal>
       <List className="todo__list">
-        <ListItem>
-          <ListItemAvatar></ListItemAvatar>
-          <ListItemText primary={props.todo.todo} secondary="deadline ⏰" />
-        </ListItem>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={(e) => setOpen(true)}
-        >
-          Edit
-        </Button>
-        <DeleteForeverIcon
-          onClick={(e) => db.collection("todos").doc(props.todo.id).delete()}
-        />
+        <div className="todo__left">
+          <ListItem className="todo__listItem">
+            <ListItemAvatar>☠️</ListItemAvatar>
+            <ListItemText primary={props.todo.todo} secondary="deadline ⏰" />
+          </ListItem>
+        </div>
+
+        <div className="todo__right">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={(e) => setOpen(true)}
+            className="todo__listEdit"
+          >
+            Edit
+          </Button>
+          <DeleteForeverIcon
+            onClick={(e) => db.collection("todos").doc(props.todo.id).delete()}
+            className="todo__listDelete"
+          />
+        </div>
+
         {/* delete functionality from db */}
       </List>
     </>
